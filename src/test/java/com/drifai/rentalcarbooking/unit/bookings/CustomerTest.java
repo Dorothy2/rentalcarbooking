@@ -30,8 +30,7 @@ public class CustomerTest {
 		Assert.assertNull(customer.getEmail());
 		Assert.assertNull(customer.getDriversLicenseId());
 		Assert.assertNull(customer.getDateOfBirth());
-		//Assert.assertNotNull(customer.getBookings());
-		//Assert.assertEquals(0, customer.getBookings().size());
+		Assert.assertEquals(false, customer.isMinimumAgeVerified());
 	}
 
 	/**
@@ -44,7 +43,7 @@ public class CustomerTest {
 	@Test
 	public void testCustomerAllFields() {
 		final Customer customer = new Customer("Bob", "White", "35 Bird Lane", "Waltham",
-				"MA", "02451", "781-555-1212", "bwhite@gmail.com", "S-12345", "11/14/1980");
+				"MA", "02451", "781-555-1212", "bwhite@gmail.com", "S-12345", new Date("11/14/1980"), true);
 		Assert.assertEquals("Bob", customer.getFirstName());
 		Assert.assertEquals("White", customer.getLastName());
 		Assert.assertEquals("35 Bird Lane", customer.getAddress1());
@@ -55,6 +54,7 @@ public class CustomerTest {
 		Assert.assertEquals("bwhite@gmail.com", customer.getEmail());
 		Assert.assertEquals("S-12345", customer.getDriversLicenseId());
 		Assert.assertEquals(new Date("11/14/1980"), customer.getDateOfBirth());
+		Assert.assertEquals(true, customer.isMinimumAgeVerified());
 		
 		//Assert.assertNotNull(customer.getBookings());
 		//Assert.assertEquals(0, customer.getBookings().size());

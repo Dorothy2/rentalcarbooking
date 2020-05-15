@@ -1,0 +1,145 @@
+package com.drifai.rentalcarbooking.integration;
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.drifai.rentalcarbooking.bookings.Booking;
+import com.drifai.rentalcarbooking.bookings.Booking.BookingStatus;
+import com.drifai.rentalcarbooking.bookings.Customer;
+import com.drifai.rentalcarbooking.cars.Car;
+import com.drifai.rentalcarbooking.cars.CarInventory;
+import com.drifai.rentalcarbooking.cars.CompanyInventory;
+import com.drifai.rentalcarbooking.cars.Location;
+import com.drifai.rentalcarbooking.service.BookingService;
+import com.drifai.rentalcarbooking.service.BookingServiceImpl;
+import com.drifai.rentalcarbooking.service.InventoryService;
+import com.drifai.rentalcarbooking.service.InventoryServiceImpl;
+
+/**
+ * @author Dorothy Rifai
+ * 
+ */
+public class InventoryTest {
+	@Before
+	public void setup() {
+		CompanyInventory companyInventory = CompanyInventory.getInstance();
+		initializeInventory(companyInventory);
+	}
+	
+	@After
+	public void teardown() {
+		System.out.println("This is where the InventoryTest teardown code would run.");
+	}
+	
+	@Test
+	public void testInventoryProcessing() {
+		CompanyInventory companyInventory = CompanyInventory.getInstance();
+		initializeInventory(companyInventory);
+		
+		InventoryService inventoryService = new InventoryServiceImpl();
+		Location location = new Location("Boston", "MA");
+		Car.CARTYPE type = Car.CARTYPE.SEDAN;
+		Date dropOffDate = new Date("06/15/2020");
+		Date pickUpDate = new Date("06/26/2020");
+		int carsBeforeSelectedCarRemoved = companyInventory.getNumberOfCars();
+		CarInventory locationCarInventory = companyInventory.getLocation(location);
+		int locationCarsBeforeSelectedCarRemoved = locationCarInventory.getNumberOfCars();
+		
+		// Are cars available ?
+		Car[] availableCars = inventoryService.getInventory(location, type, dropOffDate, pickUpDate);
+		
+		if (availableCars.length == 0) {
+			System.out.println("No cars are available for customer's requested search parameters.");
+		} else {
+			int counter = 0;
+			for(Car c : availableCars) {
+				System.out.println(++counter + " " + c.toString());
+			}
+			Car selectedCar = availableCars[0];
+			inventoryService.removeCarFromInventory(location, selectedCar);
+			int carsAfterSelectedCarRemoved = companyInventory.getNumberOfCars();
+			int locationCarsAfterSelectedCarRemoved = locationCarInventory.getNumberOfCars();
+			Assert.assertEquals((carsBeforeSelectedCarRemoved - 1), carsAfterSelectedCarRemoved);
+			Assert.assertEquals((locationCarsBeforeSelectedCarRemoved - 1), locationCarsAfterSelectedCarRemoved);
+		}
+	}	
+	
+	@Test
+	public void testInventoryProcessingNoAvailableCarForCarType() {
+		CompanyInventory companyInventory = CompanyInventory.getInstance();
+		initializeInventory(companyInventory);
+		
+		InventoryService inventoryService = new InventoryServiceImpl();
+		Location location = new Location("Boston", "MA");
+		Car.CARTYPE type = Car.CARTYPE.PICKUP_TRUCK;
+		Date dropOffDate = new Date("06/15/2020");
+		Date pickUpDate = new Date("06/26/2020");
+		int carsBeforeSelectedCarRemoved = companyInventory.getNumberOfCars();
+		CarInventory locationCarInventory = companyInventory.getLocation(location);
+		int locationCarsBeforeSelectedCarRemoved = locationCarInventory.getNumberOfCars();
+		
+		// Are cars available ?
+		Car[] availableCars = inventoryService.getInventory(location, type, dropOffDate, pickUpDate);
+		if(availableCars.length  == 0) {;
+			System.out.println("No cars are available for customer's requested search parameters.");
+		}
+		Assert.assertEquals(0, availableCars.length);
+	}	
+	
+	private void initializeInventory(CompanyInventory companyInventory) {
+		CarInventory bostonInventory = new CarInventory(new Location("Boston", "MA"));
+		populateCarInventoryForBoston(bostonInventory);		
+		
+		
+		CarInventory providenceInventory = new CarInventory(new Location("Providence", "RI"));
+		populateCarInventoryForProvidence(providenceInventory);
+		companyInventory.addLocation(bostonInventory);
+		companyInventory.addLocation(providenceInventory);	
+		
+	}
+
+	private void populateCarInventoryForBoston(CarInventory inventory) {
+		Car[] cars = new Car[3];
+		cars[0] = new Car(1, Car.CARSIZE.MIDSIZE, Car.CARTYPE.SEDAN, 5);
+		cars[1] = new Car(2, Car.CARSIZE.MIDSIZE, Car.CARTYPE.VAN, 7);
+		cars[2] = new Car(3, Car.CARSIZE.FULLSIZE, Car.CARTYPE.SEDAN, 6);
+		
+		int id = 0;
+		try {
+			for(Car car: cars) {
+				id = car.getId();
+				inventory.addCar(car.getId(), car);
+			}
+		}catch(Exception ex) {
+			System.out.println("Exception occurred with car id: " + id);
+			System.out.print(ex.getStackTrace());
+		}
+	}
+	
+	private void populateCarInventoryForProvidence(CarInventory inventory) {
+		Car[] cars = new Car[4];
+		cars[0] = new Car(4, Car.CARSIZE.MIDSIZE, Car.CARTYPE.SEDAN, 5);
+		cars[1] = new Car(5, Car.CARSIZE.MIDSIZE, Car.CARTYPE.VAN, 7);
+		cars[2] = new Car(6, Car.CARSIZE.FULLSIZE, Car.CARTYPE.PICKUP_TRUCK, 3);
+		cars[3] = new Car(7, Car.CARSIZE.ECONOMY, Car.CARTYPE.SEDAN, 4);
+		
+		
+		int id = 0;
+		try {
+			for(Car car: cars) {
+				id = car.getId();
+				inventory.addCar(car.getId(), car);
+			}
+		}catch(Exception ex) {
+			System.out.println("Exception occurred with car id: " + id);
+			System.out.print(ex.getStackTrace());
+		}
+	}
+}
+

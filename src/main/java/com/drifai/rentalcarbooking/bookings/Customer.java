@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
+
 /**
  * Customer class containing information about customers for car reservation bookings.
  * 
@@ -22,6 +24,7 @@ import java.util.List;
 	private String email;
 	private String driversLicenseId;
 	private Date dateOfBirth;
+	private boolean minimumAgeVerified;
 	//private final List<Booking> bookings = new ArrayList<Booking>();
 	//final SimpleDateFormat DD_MM_YYYY = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -50,11 +53,15 @@ import java.util.List;
 	 *            Customer Phone.
 	 * @param email
 	 *            Customer Email.
+     * @param driversLicenseId
+     * 			  Customer DriverLicenseId.
+     * @param dateOfBirth
+     * 			  Customer dateOfBirth
 	 */
 	public Customer(final String firstName, final String lastName,
 			final String address1, final String city, final String state, 
 			final String zipCode, final String phone, final String email,
-			final String driversLicenseId, final String strDateOfBirth) {
+			final String driversLicenseId, final Date dateOfBirth, final boolean minimumAgeVerified) {
 		this.setFirstName(firstName);
 		this.setLastName(lastName);
 		this.setAddress1(address1);
@@ -64,17 +71,8 @@ import java.util.List;
 		this.setPhone(phone);
 		this.setEmail(email);
 		this.setDriversLicenseId(driversLicenseId);
-		// TODO: validation for string DOB passed in (later release :) )
-		try {
-			Date dob = DRifaiConstants.DD_MM_YYYY.parse(strDateOfBirth);
-			// TODO: Need check somewhere to make sure the customer is > 25
-			this.setDateOfBirth(dob);
-		} catch (ParseException e) {
-			// TODO If time permits, handle this more gracefully.
-			e.printStackTrace();
-		}
-		
-		
+		this.setMinimumAgeVerified(minimumAgeVerified);
+		this.setDateOfBirth(dateOfBirth);
 	}
 	
 	public String getPhone() {
@@ -161,6 +159,14 @@ import java.util.List;
 
 	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public boolean isMinimumAgeVerified() {
+		return minimumAgeVerified;
+	}
+	
+	public void setMinimumAgeVerified(boolean verified) {
+		this.minimumAgeVerified = verified;
 	}
 
 
