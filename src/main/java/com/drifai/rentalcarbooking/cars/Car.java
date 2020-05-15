@@ -1,5 +1,12 @@
 package com.drifai.rentalcarbooking.cars;
 
+/**
+ * 
+ * @author Dorothy Rifai
+ * 
+ * Base class for CarHistory. The class contains enums for car type and car size.
+ *
+ */
 public class Car {
 	private Integer id;
 	private CARSIZE size;
@@ -24,6 +31,15 @@ public class Car {
 		super();
 	}
 	
+	/***
+	 * Construction which takes params. Used to populate the car inventory for each location, 
+	 * and the company inventory.
+	 * 
+	 * @param id int
+	 * @param size Car.CARSIZE
+	 * @param type Car.CARTYPE
+	 * @param numberOfPassengers int
+	 */
 	public Car(int id, CARSIZE size, CARTYPE type, int numberOfPassengers) {
 		this();
 		this.id = id;

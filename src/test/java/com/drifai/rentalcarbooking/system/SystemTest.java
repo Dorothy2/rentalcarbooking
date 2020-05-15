@@ -24,6 +24,9 @@ import com.drifai.rentalcarbooking.service.InventoryService;
 import com.drifai.rentalcarbooking.service.InventoryServiceImpl;
 
 /**
+ * 
+ * These tests are intended to show how the entire system works. 
+ * 
  * @author Dorothy Rifai
  * 
  */

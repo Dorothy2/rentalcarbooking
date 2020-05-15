@@ -2,18 +2,24 @@ package com.drifai.rentalcarbooking.cars;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/***
+ * 
+ * @author Dorothy Rifai
+ * 
+ * Stores location info for each rental center. 
+ * This information is provided to the CarInventory object. There is one CarInventory reference
+ * for each location.
+ *
+ */
 public class Location {
 	private Integer id;
 	private String city;
 	private String state;
-	private List<String> applicableZipCodes;
-	//private CarInventory inventory;
+
 	
 	
 	public Location() {
 		super();
-		applicableZipCodes = new ArrayList<String>();
 	}
 	
 	public Location(String city, String state) {
@@ -22,10 +28,6 @@ public class Location {
 		this.state = state;
 	}
 	
-	public void addZipCode(String zip) {
-		applicableZipCodes.add(zip);
-	}
-
 	public String getCity() {
 		return city;
 	}
@@ -41,21 +43,4 @@ public class Location {
 	public void setState(String state) {
 		this.state = state;
 	}
-
-	public List<String> getApplicableZipCodes() {
-		return applicableZipCodes;
-	}
-
-	public void setApplicableZipCodes(List<String> applicableZipCodes) {
-		this.applicableZipCodes = applicableZipCodes;
-	}
-
-//	public CarInventory getInventory() {
-//		return inventory;
-//	}
-//
-//	public void setInventory(CarInventory inventory) {
-//		this.inventory = inventory;
-//	}
-
 }

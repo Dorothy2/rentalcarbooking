@@ -2,6 +2,13 @@ package com.drifai.rentalcarbooking.utilities;
 
 import java.util.Date;
 
+/**
+ * TimeUtility has utility methods for doing dateTime calculations for detected dates when the car has already 
+ * been reserved.
+ * 
+ * @author Dorothy Rifai
+ *
+ */
 public class TimeUtility {
 
 	public TimeUtility() {

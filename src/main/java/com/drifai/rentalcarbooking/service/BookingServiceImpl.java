@@ -13,6 +13,14 @@ import com.drifai.rentalcarbooking.bookings.Trip;
 import com.drifai.rentalcarbooking.cars.Car;
 import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
 
+/***
+ * This is the implementation of the BookingService interface. The BookingService
+ * facilitates the placing and cancelling of car rental reservations. Per requirement "2." there is a
+ * method for making reservations for multiple trips involving one customer and one car.
+ * 
+ * @author Dorothy Rifai
+ *
+ */
 public class BookingServiceImpl implements BookingService {
 
 	private static final int CUSTOMER_AGE_MINIMUM = 25;

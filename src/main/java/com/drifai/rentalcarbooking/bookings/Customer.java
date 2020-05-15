@@ -1,12 +1,6 @@
 package com.drifai.rentalcarbooking.bookings;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
 
 /**
  * Customer class containing information about customers for car reservation bookings.
@@ -25,8 +19,6 @@ import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
 	private String driversLicenseId;
 	private Date dateOfBirth;
 	private boolean minimumAgeVerified;
-	//private final List<Booking> bookings = new ArrayList<Booking>();
-	//final SimpleDateFormat DD_MM_YYYY = new SimpleDateFormat("MM/dd/yyyy");
 
 	/**
 	 * Default constructor for the Customer class.
@@ -37,26 +29,17 @@ import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
 	/**
 	 * Constructor for the Customer class which takes customer data via params
 	 * 
-	 * @param firstName
-	 *            Customer First Name.
-	 * @param lastName
-	 *            Customer Last Name.
-	 * @param address1
-	 *            Customer Address line 1.
-	 * @param city
-	 *            Customer City.
-	 * @param state
-	 *            Customer State.
-	 * @param zipCode
-	 *            Customer ZipCode.
-	 * @param phone
-	 *            Customer Phone.
-	 * @param email
-	 *            Customer Email.
-     * @param driversLicenseId
-     * 			  Customer DriverLicenseId.
-     * @param dateOfBirth
-     * 			  Customer dateOfBirth
+	 * @param firstName  Customer First Name.
+	 * @param lastName   Customer Last Name.
+	 * @param address1   Customer Address line 1.
+	 * @param city       Customer City.
+	 * @param state      Customer State.
+	 * @param zipCode    Customer ZipCode.
+	 * @param phone      Customer Phone.
+	 * @param email      Customer Email.
+     * @param driversLicenseId    Customer DriverLicenseId.
+     * @param dateOfBirth    Customer dateOfBirth
+     * @param minimumAgeVerified is customer 25 or over 
 	 */
 	public Customer(final String firstName, final String lastName,
 			final String address1, final String city, final String state, 

@@ -28,7 +28,7 @@ public class BlackoutPeriodTest {
 
 	/**
 	 * Test method for
-	 * {@link drifai.rentalcarbooking.bookings.BlackoutPeriod#BlackoutPeriod(java.util.Date, java.util.Date)}
+	 * {@link drifai.rentalcarbooking.bookings.BlackoutPeriod#BlackoutPeriod(java.util.Date, java.util.Date)}.
 	 * 
 	 */
 	@Test

@@ -3,7 +3,17 @@ package com.drifai.rentalcarbooking.bookings;
 import java.util.Date;
 
 import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
-
+/**
+ * 
+ * @author Dorothy Rifai
+ * 
+ * BlackoutPeriod is used to track the unavailable dates.
+ * Dates are unavailable either because the car has already been reserved for rentals. 
+ * 
+ * There is also a CarHistory checkAvailability() method which inserts blackout periods for 
+ * all desired rental trips, and then resets it to the actual blackout period before leaving the method.
+ *
+ */
 public class BlackoutPeriod {
 	private Date startDate;
 	private Date endDate;
@@ -12,7 +22,11 @@ public class BlackoutPeriod {
 	public BlackoutPeriod() {
 		super();
 	}
-	
+	/***
+	 * 
+	 * @param startDate BlackoutPeriod starts
+	 * @param endDate BlackoutPeriod ends
+	 */
 	public BlackoutPeriod(Date startDate, Date endDate) {
 		this.startDate = startDate;
 		this.endDate = endDate;

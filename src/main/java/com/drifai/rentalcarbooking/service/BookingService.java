@@ -8,6 +8,14 @@ import com.drifai.rentalcarbooking.bookings.Customer;
 import com.drifai.rentalcarbooking.bookings.Trip;
 import com.drifai.rentalcarbooking.cars.Car;
 
+/***
+ * This is the interface of services that the BookingService provides. The BookingService
+ * facilitates the placing and cancelling of car rental reservations. Per requirement "2." there is a
+ * convenience method for making reservations for multiple trips involving one customer and one car.
+ * 
+ * @author Dorothy Rifai
+ *
+ */
 public interface BookingService {
 
 	

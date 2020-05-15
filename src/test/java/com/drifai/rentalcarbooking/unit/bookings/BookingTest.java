@@ -35,8 +35,8 @@ public class BookingTest {
 
 	/**
 	 * Test method for
-	 * {@link drifai.rentalcarbooking.bookings.Booking#Booking(java.lang.Integer, java.util.Date,
-	 *  java.util.Date, java.lang.Boolean)}
+	 * {@link drifai.rentalcarbooking.bookings.Booking#Booking(java.util.Date,
+	 *  java.util.Date, com.drifai.rentalcarbooking.cars.CarHistory, com.drifai.rentalcarbooking.bookings.Customer)}
 	 * 
 	 */
 	@Test
@@ -54,7 +54,7 @@ public class BookingTest {
 	/**
 	 * Test method for
 	 * {@link drifai.rentalcarbooking.bookings.Booking#Booking(java.lang.Integer, java.util.Date,
-	 *  int, java.lang.Boolean)}
+	 *  int, com.drifai.rentalcarbooking.cars.CarHistory, com.drifai.rentalcarbooking.bookings.Customer)}
 	 * 
 	 */
 	@Test
@@ -87,8 +87,6 @@ public class BookingTest {
 		now = new Date("07/01/2020");
 		booking.determineBookingStatus(now);
 		Assert.assertEquals(BookingStatus.PAST, booking.getStatus());
-		
-		// Add test for internal error (ERROR)
 	}
 	
 	/**

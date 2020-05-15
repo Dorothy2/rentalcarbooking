@@ -5,6 +5,13 @@ import java.util.Date;
 
 import com.drifai.rentalcarbooking.cars.Car;
 
+/**
+ * 
+ * @author Dorothy Rifai
+ * 
+ * Storage for actual transaction of booking the care reservation
+ *
+ */
 public class Booking {
 	private Integer id;
 	private Date dropOffDate;
@@ -18,7 +25,7 @@ public class Booking {
 	    ACTIVE, // between pickup date and drop off date; customer has car
 	    INACTIVE, // user cancelled booking prior to pick up date
 	    PAST, // after reservation dates, presumably car was returned - determining whether car was returned is outside scope
-	    ERROR, // internal error, Customer Service would have to fix
+	    ERROR, // internal error, Customer Service would have to fix (did not use)
 	    CANCELLED; // company cancelled reservation because customer was < 25
 	}
 	
@@ -26,12 +33,27 @@ public class Booking {
     	super();
     }
 	
+    /**
+     * Booking constructor based on starting date and number of days
+     * 
+     * @param pickUpDate Date
+     * @param days int
+     * @param car CarHistory
+     * @param customer Customer
+     */
 	public Booking(Date pickUpDate, int days, CarHistory car, Customer customer) {
 		this(pickUpDate, null, car, customer);
 		setDropOffDate(convertDaysToDropOffDate(pickUpDate, days));
 	}
 	
-
+	/**
+	 * Booking constructor 
+	 * 
+	 * @param pickUpDate Date
+	 * @param dropOffDate Date
+	 * @param car CarHistory 
+	 * @param customer Customer
+	 */
 	public Booking(Date pickUpDate, Date dropOffDate, CarHistory car, Customer customer) {
 		super();
 		this.car = car;
@@ -60,6 +82,13 @@ public class Booking {
 	public void setPickUpDate(Date pickUpDate) {
 		this.pickUpDate = pickUpDate;
 	}
+	
+	/**
+	 * Converts number of days and pickUpDate to dropOffDate
+	 * @param dropOffDate Date
+	 * @param days int
+	 * @return
+	 */
 	private Date convertDaysToDropOffDate(Date dropOffDate, int days) {
 	    // convert date to calendar
         Calendar c = Calendar.getInstance();

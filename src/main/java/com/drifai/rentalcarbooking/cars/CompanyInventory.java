@@ -9,7 +9,13 @@ import com.drifai.rentalcarbooking.bookings.CarHistory;
 /*
  * @author Dorothy Rifai
  * 
- * Singleton pattern
+ * This is the car inventory for the whole company. It is a map of key-value pairs, where
+ * the key is a concatenated string of the city and state, and the value is the CarInventory 
+ * for that location.
+ * 
+ * This class employs the Singleton pattern because we want one "source of truth" for the current
+ * state of the company's inventory. The singleton has a private construction and a synchronized public
+ *  getInstance() method
  *
  */
 
@@ -43,26 +49,6 @@ public class CompanyInventory {
 			returnCode = true;
 		}
 		return returnCode;
-	}
-	
-	public boolean updateLocation(CarHistory car) {
-		for(String locationKey : companyInventory.keySet()) {
-			String[] s = locationKey.split(" ");
-			Location location = new Location(s[0], s[1]);
-			CarInventory localInventory = getLocation(location);
-			if(localInventory.getMap().containsKey(car.getId())) {
-				try {
-					localInventory.updateCar(car.getId(), car);
-				} catch (Exception e) {
-					System.out.println("Error in CompanyInventory.updateLocation()");
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					return false;
-				}
-				return true;
-			}            
-		}
-		return false;
 	}
 	
 	private Map<String, CarInventory> getCompanyInventory() {

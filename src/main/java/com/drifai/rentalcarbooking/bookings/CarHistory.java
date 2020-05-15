@@ -7,6 +7,12 @@ import java.util.List;
 import com.drifai.rentalcarbooking.cars.Car;
 import com.drifai.rentalcarbooking.utilities.TimeUtility;
 
+/**
+ * CarHistory extends the Car functionality to track dates where the car has already been booked.
+ * 
+ * @author Dorothy Rifai
+ *
+ */
 public class CarHistory extends Car {
 	List<BlackoutPeriod> blackoutDates = new ArrayList<>();
 	
@@ -14,6 +20,15 @@ public class CarHistory extends Car {
 		super();
 	}
 	
+	/**
+	 * CarHistory constructor
+	 * 
+	 * @param id int
+	 * @param size Car.CARESIZE
+	 * @param type Car.CARTYPE type
+	 * @param numberOfPassengers int
+	 * 
+	 */
 	public CarHistory(int id, CARSIZE size, CARTYPE type, int numberOfPassengers) {
 		super(id, size, type, numberOfPassengers);
 	}
@@ -27,6 +42,13 @@ public class CarHistory extends Car {
 		return blackoutDates;
 	}
 	
+	/**
+	 * Checks the availability of a single car for a collection of trips. New blackout periods are calculated
+	 * for each trip. At the end of the 
+	 * method the car's blackoutPeriods are reset.
+	 * @param trips  Trips with start and end dates
+	 * @return boolean
+	 */
 	public boolean checkAvailability(Trip[] trips) {
 		boolean available = true;
 		TimeUtility t = new TimeUtility();

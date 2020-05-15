@@ -18,6 +18,8 @@ import com.drifai.rentalcarbooking.service.InventoryServiceImpl;
 /**
  * @author Dorothy Rifai
  * 
+ * Integration tests for the InventoryService.
+ * 
  */
 public class InventoryServiceTest {
 	@Before

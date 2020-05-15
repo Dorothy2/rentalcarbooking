@@ -35,9 +35,9 @@ public class CustomerTest {
 
 	/**
 	 * Test method for
-	 * {@link drifai.rentalcarbooking.bookings.Customer#Customer(java.lang.String, java.lang.String,
+	 * {@link com.drifai.rentalcarbooking.bookings.Customer#Customer(java.lang.String, java.lang.String,
 	 *  java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String,
-	 *  java.lang.String, java.lang.String, java.lang.String)}
+	 *  java.lang.String, java.lang.String, java.util.Date, boolean)}
 	 * .
 	 */
 	@Test

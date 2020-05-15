@@ -13,9 +13,18 @@ import com.drifai.rentalcarbooking.cars.Location;
 import com.drifai.rentalcarbooking.utilities.TimeUtility;
 
 
+/**
+ * 
+ * This is the implementation of the InventoryService interface. 
+ * 
+ * There is a convenience method to allow retrieval of one car which meets the customer's
+ * search criteria for location, car type, and pickUp and dropOff Dates
+ * 
+ * @author Dorothy Rifai
+ *
+ */
 public class InventoryServiceImpl implements InventoryService {
 	
-	// Needs null constructor for future Spring autowiring
 	public InventoryServiceImpl() {
 		
 	}
@@ -31,19 +40,19 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public CarHistory[] getInventory(Location location, CARTYPE type, Date dropOffDate, Date pickUpDate) {
+	public CarHistory[] getInventory(Location location, CARTYPE type, Date pickUpDate, Date dropOffDate) {
 		CarHistory[] noCarsAvailable = new CarHistory[0];
 		CarInventory carInventory = CompanyInventory.getInstance().getLocation(location);
 		int available = carInventory.getNumberOfCars(type);
 		if(available == 0) {
 			return noCarsAvailable;
 		}
-		//return carInventory.getCars(type);
 		List<CarHistory> filteredList = carInventory.getCars(type);
 		Iterator<CarHistory> it = filteredList.iterator();
 		while(it.hasNext()) {
 			CarHistory car = it.next();
-			// Remove cars from the list if there is a conflict with previous rentals
+			// Remove cars from the list pf car rental candidates  if there is a conflict
+			// with previous reservations
 			if(! verifyNoBlackoutDates(car, dropOffDate, pickUpDate)) {
 				it.remove();
 			}
