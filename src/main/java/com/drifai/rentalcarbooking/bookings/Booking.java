@@ -9,11 +9,11 @@ public class Booking {
 	private Integer id;
 	private Date dropOffDate;
 	private Date pickUpDate;
-	private Car car;
+	private CarHistory car;
 	private Customer customer;
-	private BookingStatus status;
+	private Booking.BookingStatus status;
 	
-	public enum BookingStatus {
+	public static enum BookingStatus {
 	    PENDING, // reserved, prior to pick up date
 	    ACTIVE, // between pickup date and drop off date; customer has car
 	    INACTIVE, // user cancelled booking prior to pick up date
@@ -26,13 +26,13 @@ public class Booking {
     	super();
     }
 	
-	public Booking(Date pickUpDate, int days, Car car, Customer customer) {
+	public Booking(Date pickUpDate, int days, CarHistory car, Customer customer) {
 		this(pickUpDate, null, car, customer);
 		setDropOffDate(convertDaysToDropOffDate(pickUpDate, days));
 	}
 	
 
-	public Booking(Date pickUpDate, Date dropOffDate, Car car, Customer customer) {
+	public Booking(Date pickUpDate, Date dropOffDate, CarHistory car, Customer customer) {
 		super();
 		this.car = car;
 		this.customer = customer;
@@ -42,6 +42,9 @@ public class Booking {
 		}
 		if(! customer.isMinimumAgeVerified()) {
 			this.status = BookingStatus.CANCELLED;
+		} else { 
+			Date now = new Date();
+			determineBookingStatus(now);
 		}
 	}	
 
@@ -70,7 +73,7 @@ public class Booking {
 	}
 	
 	public void determineBookingStatus(Date now) {
-		this.status = BookingStatus.ERROR;
+		this.status = Booking.BookingStatus.ERROR;
 		//Date now = new Date();
 		//System.out.println("Date: " + DRifaiConstants.DD_MM_YYYY_HH_MM_SS.format(now));
 		if(dropOffDate == null  || pickUpDate == null) {
@@ -78,13 +81,13 @@ public class Booking {
 			return;
 		}
 		if(now.compareTo(pickUpDate) < 0)  {
-			this.status = BookingStatus.PENDING;
+			this.status = Booking.BookingStatus.PENDING;
 		}
 		else if((now.compareTo(pickUpDate) > 0) && (now.compareTo(dropOffDate) <= 0)) {
-			this.status = BookingStatus.ACTIVE;
+			this.status = Booking.BookingStatus.ACTIVE;
 		}
 		else if((now.compareTo(pickUpDate) > 0)  && (now.compareTo(dropOffDate) > 0)) {
-			this.status = BookingStatus.PAST;
+			this.status = Booking.BookingStatus.PAST;
 		}
 		return;
 	}
@@ -93,7 +96,7 @@ public class Booking {
 		return status;
 	}
 
-	public Car getCar() {
+	public CarHistory getCar() {
 		return car;
 	}
 
@@ -105,8 +108,8 @@ public class Booking {
 		this.customer = customer;
 	}
 
-	public void setStatus(BookingStatus status) {
-		this.setStatus(status);
+	public void setStatus(Booking.BookingStatus status) {
+		this.status = status;
 		
 	}
 

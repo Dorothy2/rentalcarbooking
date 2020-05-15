@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import com.drifai.rentalcarbooking.bookings.CarHistory;
+
 /*
  * @author Dorothy Rifai
  * 
@@ -41,6 +43,26 @@ public class CompanyInventory {
 			returnCode = true;
 		}
 		return returnCode;
+	}
+	
+	public boolean updateLocation(CarHistory car) {
+		for(String locationKey : companyInventory.keySet()) {
+			String[] s = locationKey.split(" ");
+			Location location = new Location(s[0], s[1]);
+			CarInventory localInventory = getLocation(location);
+			if(localInventory.getMap().containsKey(car.getId())) {
+				try {
+					localInventory.updateCar(car.getId(), car);
+				} catch (Exception e) {
+					System.out.println("Error in CompanyInventory.updateLocation()");
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					return false;
+				}
+				return true;
+			}            
+		}
+		return false;
 	}
 	
 	private Map<String, CarInventory> getCompanyInventory() {

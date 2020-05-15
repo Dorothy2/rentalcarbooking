@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.drifai.rentalcarbooking.bookings.Booking;
 import com.drifai.rentalcarbooking.bookings.Booking.BookingStatus;
+import com.drifai.rentalcarbooking.bookings.CarHistory;
 import com.drifai.rentalcarbooking.bookings.Customer;
 import com.drifai.rentalcarbooking.cars.Car;
 import com.drifai.rentalcarbooking.cars.Car.CARSIZE;
@@ -69,14 +70,14 @@ public class CompanyInventoryTest {
 
 	
 	private void populateCarInventory(CarInventory inventory) {
-		Car[] cars = new Car[3];
-		cars[0] = new Car(1, Car.CARSIZE.MIDSIZE, Car.CARTYPE.SEDAN, 5);
-		cars[1] = new Car(2, Car.CARSIZE.MIDSIZE, Car.CARTYPE.VAN, 7);
-		cars[2] = new Car(3, Car.CARSIZE.FULLSIZE, Car.CARTYPE.SEDAN, 6);
+		CarHistory[] cars = new CarHistory[3];
+		cars[0] = new CarHistory(1, Car.CARSIZE.MIDSIZE, Car.CARTYPE.SEDAN, 5);
+		cars[1] = new CarHistory(2, Car.CARSIZE.MIDSIZE, Car.CARTYPE.VAN, 7);
+		cars[2] = new CarHistory(3, Car.CARSIZE.FULLSIZE, Car.CARTYPE.SEDAN, 6);
 		
 		int id = 0;
 		try {
-			for(Car car: cars) {
+			for(CarHistory car: cars) {
 				id = car.getId();
 				inventory.addCar(car.getId(), car);
 			}

@@ -1,11 +1,15 @@
 package com.drifai.rentalcarbooking.service;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.drifai.rentalcarbooking.bookings.Booking.BookingStatus;
+import com.drifai.rentalcarbooking.bookings.CarHistory;
 import com.drifai.rentalcarbooking.bookings.Booking;
 import com.drifai.rentalcarbooking.bookings.Customer;
+import com.drifai.rentalcarbooking.bookings.Trip;
 import com.drifai.rentalcarbooking.cars.Car;
 import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
 
@@ -37,9 +41,27 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public Booking makeReservation(Customer customer, Car car, Date pickUpDate, Date dropOffDate) {
-		final Booking booking = new Booking(dropOffDate, pickUpDate, car, customer);
+	public Booking makeReservation(Customer customer, CarHistory car, Date pickUpDate, Date dropOffDate) {
+		final Booking booking = new Booking(pickUpDate, dropOffDate, car, customer);
+		if(BookingStatus.PENDING.equals(booking.getStatus())) {
+			car.addBlackoutPeriod(pickUpDate, dropOffDate);
+		}
 		return booking;
+	}
+	
+	@Override
+	public Booking[] makeReservations(Customer customer, CarHistory car, Trip[] trips) {
+		List<Booking> bookingList = new ArrayList<>();
+		for(Trip trip : trips) {
+			Date pickUpDate = trip.getStartDate();
+			Date dropOffDate = trip.getEndDate();
+			final Booking booking = new Booking(pickUpDate, dropOffDate, car, customer);
+			if(BookingStatus.PENDING.equals(booking.getStatus())) {
+				car.addBlackoutPeriod(pickUpDate, dropOffDate);
+			}
+			bookingList.add(booking);
+		}
+		return bookingList.toArray(new Booking[bookingList.size()]);
 	}
 	
 	private boolean verifyMinimumAge(Date dateOfBirth) {

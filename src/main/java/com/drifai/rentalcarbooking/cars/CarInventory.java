@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.drifai.rentalcarbooking.bookings.CarHistory;
+
 public class CarInventory {
-	private Map<Integer, Car> carMap;
+	private Map<Integer, CarHistory> carMap;
 	private Location location;
 	private boolean locationPopulated;
 	
@@ -26,7 +28,11 @@ public class CarInventory {
 		
 	}
 	
-	public void addCar(Integer id, Car car ) throws Exception {
+	public CarHistory getCar(Integer id) {
+		return carMap.get(id);
+	}
+	
+	public void addCar(Integer id, CarHistory car ) throws Exception {
 		if(id == null) {
 			throw new Exception("addCar: Car identifier value is null.");
 		} else if(car == null) {
@@ -36,7 +42,7 @@ public class CarInventory {
 		carMap.put(id, car);
 	}
 	
-	public void removeCar(Integer id, Car car ) throws Exception {
+	public void removeCar(Integer id, CarHistory car ) throws Exception {
 		if(id == null) {
 			throw new Exception("removeCar: Car identifier value is null.");
 		}  else if(! carMap.containsKey(id)) {
@@ -45,28 +51,39 @@ public class CarInventory {
 		carMap.remove(id);
 	}
 	
+	public void updateCar(Integer id, CarHistory car ) throws Exception {
+		if(id == null) {
+			throw new Exception("addCar: Car identifier value is null.");
+		} else if(car == null) {
+			throw new Exception("addCar: Car object is null.");
+		}
+			
+		carMap.put(id, car);
+	}
+	
 	public int getNumberOfCars() {
 		return carMap.size();
 	}
 	
-	public Car[] getCars(Car.CARTYPE type) {
-		List<Car> temp = new ArrayList<>();
-		for(Car c : carMap.values()) {
+	public List<CarHistory> getCars(Car.CARTYPE type) {
+		List<CarHistory> filteredList = new ArrayList<>();
+		for(CarHistory c : carMap.values()) {
 			if(type.equals(c.getType())) {
-				temp.add(c);
+				filteredList.add(c);
 			}
 		}
-		return temp.toArray(new Car[temp.size()]);
+		return(filteredList);
+		//return temp.toArray(new CarHistory[temp.size()]);
 	}
 	
-	public Car[] getCars(Car.CARSIZE size) {
-		List<Car> temp = new ArrayList<>();
-		for(Car c : carMap.values()) {
+	public CarHistory[] getCars(Car.CARSIZE size) {
+		List<CarHistory> temp = new ArrayList<>();
+		for(CarHistory c : carMap.values()) {
 			if(size.equals(c.getSize())) {
 				temp.add(c);
 			}
 		}
-		return temp.toArray(new Car[temp.size()]);
+		return temp.toArray(new CarHistory[temp.size()]);
 	}
 	
 	public int getNumberOfCars(Car.CARSIZE size) {
@@ -97,6 +114,10 @@ public class CarInventory {
 			}
 		}
 		return counter;
+	}
+	
+	public Map<Integer, CarHistory> getMap() {
+		return carMap;
 	}
 
 	public Location getLocation() {

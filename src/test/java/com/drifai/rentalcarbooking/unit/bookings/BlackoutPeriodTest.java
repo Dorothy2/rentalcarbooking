@@ -6,13 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.drifai.rentalcarbooking.bookings.BlackoutPeriod;
-import com.drifai.rentalcarbooking.bookings.Booking;
-import com.drifai.rentalcarbooking.bookings.Booking.BookingStatus;
 import com.drifai.rentalcarbooking.utilities.DRifaiConstants;
-import com.drifai.rentalcarbooking.bookings.Customer;
-import com.drifai.rentalcarbooking.cars.Car;
-import com.drifai.rentalcarbooking.cars.CarInventory;
-import com.drifai.rentalcarbooking.cars.Location;
 
 /**
  * @author Dorothy Rifai
@@ -39,10 +33,10 @@ public class BlackoutPeriodTest {
 	 */
 	@Test
 	public void testBlackoutPeriodAllFields() {
-		final BlackoutPeriod blackoutPeriod = new BlackoutPeriod(new Date("05/15/2020"), new Date("05/25/2020"));
-		Assert.assertEquals("05/15/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getStartDate()));
-		Assert.assertEquals("05/25/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getEndDate()));
-		Assert.assertEquals("05/15/2020:05/25/2020", blackoutPeriod.getKey());
+		final BlackoutPeriod blackoutPeriod = new BlackoutPeriod(new Date("06/15/2020"), new Date("06/25/2020"));
+		Assert.assertEquals("06/15/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getStartDate()));
+		Assert.assertEquals("06/25/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getEndDate()));
+		Assert.assertEquals("06/15/2020:06/25/2020", blackoutPeriod.getKey());
 	}
 
 }
