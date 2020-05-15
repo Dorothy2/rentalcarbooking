@@ -5,7 +5,7 @@
   <version>1.0</version>
   <name>Rental Car Booking System</name>
   <description>Rental Car Booking System without UI </description>
-	<url>https://github.com/TBD</url>
+	<url>https://github.com/Dorothy2/rentalcarbooking</url>
 	
 	<build>
 		<plugins>
