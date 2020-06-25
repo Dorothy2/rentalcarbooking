@@ -13,3 +13,10 @@ Please use Java as the implementation language.
  While the solution should allow for extension to be exposed as a service, please note that
 
  No UI needs to be provided
+ 
+ To Test app:
+ 
+ Run integration tests BookingServiceTest and InventoryServiceTest.
+ 
+ TBD: (1) remove code which is not part of requirements, like the check that the driver is >= 25.
+      (2) refactor dates in tests by basing from the current system date so that this can be run at any time and the tests will not fail due to old dates.
