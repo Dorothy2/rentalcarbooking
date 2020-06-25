@@ -42,8 +42,8 @@ public class BookingServiceTest {
 	public void testBookingProcess() {
 		// Create Customer
 		BookingService bookingService = new BookingServiceImpl();
-		Date pickUpDate = new Date("06/15/2020");
-		Date dropOffDate = new Date("06/26/2020");
+		Date pickUpDate = new Date("07/15/2020");
+		Date dropOffDate = new Date("07/26/2020");
 		CarHistory selectedCar = makeCarSelection(pickUpDate, dropOffDate);
 		Customer customer = bookingService.createCustomer("Bob", "White", "35 Bird Lane", "Waltham",
 				"MA", "02451", "781-555-1212", "bwhite@gmail.com", "S-12345", "11/14/1980");
@@ -58,8 +58,8 @@ public class BookingServiceTest {
 		Customer customer = bookingService.createCustomer("Bob", "White", "35 Bird Lane", "Waltham", "MA", "02451",
 				"781-555-1212", "bwhite@gmail.com", "S-12345", "11/14/1980");
 		Trip[] trips = new Trip[2];
-		trips[0] = new Trip(new Date("06/15/2020"), new Date("06/26/2020"));
-		trips[1] = new Trip(new Date("07/01/2020"), new Date("07/04/2020"));
+		trips[0] = new Trip(new Date("07/15/2020"), new Date("07/26/2020"));
+		trips[1] = new Trip(new Date("08/01/2020"), new Date("08/04/2020"));
 
 		CarHistory selectedCar = makeCarSelection(trips[0].getStartDate(), trips[0].getEndDate());
 		boolean available = selectedCar == null ? false : selectedCar.checkAvailability(trips);

@@ -33,9 +33,9 @@ public class TripTest {
 	 */
 	@Test
 	public void testBlackoutPeriodAllFields() {
-		final Trip trip = new Trip(new Date("06/15/2020"), new Date("06/25/2020"));
-		Assert.assertEquals("06/15/2020", DRifaiConstants.DD_MM_YYYY.format(trip.getStartDate()));
-		Assert.assertEquals("06/25/2020", DRifaiConstants.DD_MM_YYYY.format(trip.getEndDate()));
+		final Trip trip = new Trip(new Date("07/15/2020"), new Date("07/25/2020"));
+		Assert.assertEquals("07/15/2020", DRifaiConstants.DD_MM_YYYY.format(trip.getStartDate()));
+		Assert.assertEquals("07/25/2020", DRifaiConstants.DD_MM_YYYY.format(trip.getEndDate()));
 	}
 
 }

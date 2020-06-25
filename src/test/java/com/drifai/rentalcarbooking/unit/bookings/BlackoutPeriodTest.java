@@ -33,10 +33,10 @@ public class BlackoutPeriodTest {
 	 */
 	@Test
 	public void testBlackoutPeriodAllFields() {
-		final BlackoutPeriod blackoutPeriod = new BlackoutPeriod(new Date("06/15/2020"), new Date("06/25/2020"));
-		Assert.assertEquals("06/15/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getStartDate()));
-		Assert.assertEquals("06/25/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getEndDate()));
-		Assert.assertEquals("06/15/2020:06/25/2020", blackoutPeriod.getKey());
+		final BlackoutPeriod blackoutPeriod = new BlackoutPeriod(new Date("07/15/2020"), new Date("07/25/2020"));
+		Assert.assertEquals("07/15/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getStartDate()));
+		Assert.assertEquals("07/25/2020", DRifaiConstants.DD_MM_YYYY.format(blackoutPeriod.getEndDate()));
+		Assert.assertEquals("07/15/2020:07/25/2020", blackoutPeriod.getKey());
 	}
 
 }

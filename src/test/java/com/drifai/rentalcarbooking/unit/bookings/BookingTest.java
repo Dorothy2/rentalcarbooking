@@ -75,16 +75,16 @@ public class BookingTest {
 		CarHistory car = new CarHistory(1, Car.CARSIZE.MIDSIZE, Car.CARTYPE.SEDAN, 5);
 		Customer customer = new Customer("Bob", "White", "35 Bird Lane", "Waltham",
 				"MA", "02451", "781-555-1212", "bwhite@gmail.com", "S-12345", new Date("11/14/1980"), true);
-		Booking booking = new Booking(new Date("06/15/2020"), new Date("06/25/2020"), car, customer);
+		Booking booking = new Booking(new Date("07/15/2020"), new Date("07/25/2020"), car, customer);
 		
 		booking.determineBookingStatus(now);
 		Assert.assertEquals(BookingStatus.PENDING, booking.getStatus());
 		
-		now = new Date("06/16/2020");
+		now = new Date("07/16/2020");
 		booking.determineBookingStatus(now);
 		Assert.assertEquals(BookingStatus.ACTIVE, booking.getStatus());
 		
-		now = new Date("07/01/2020");
+		now = new Date("08/01/2020");
 		booking.determineBookingStatus(now);
 		Assert.assertEquals(BookingStatus.PAST, booking.getStatus());
 	}
@@ -98,9 +98,9 @@ public class BookingTest {
 		CarHistory car = new CarHistory(1, Car.CARSIZE.MIDSIZE, Car.CARTYPE.SEDAN, 5);
 		Customer customer = new Customer("David", "Duckling", "35 Bird Lane", "Waltham",
 				"MA", "02451", "781-555-1212", "dduckling@gmail.com", "S-45678", new Date("11/14/2006"), false);
-		final Booking booking = new Booking(new Date("06/15/2020"), 10, car, customer);
-		Assert.assertEquals("06/15/2020", DRifaiConstants.DD_MM_YYYY.format(booking.getPickUpDate()));
-		Assert.assertEquals("06/25/2020", DRifaiConstants.DD_MM_YYYY.format(booking.getDropOffDate()));
+		final Booking booking = new Booking(new Date("07/15/2020"), 10, car, customer);
+		Assert.assertEquals("07/15/2020", DRifaiConstants.DD_MM_YYYY.format(booking.getPickUpDate()));
+		Assert.assertEquals("07/25/2020", DRifaiConstants.DD_MM_YYYY.format(booking.getDropOffDate()));
 		Assert.assertEquals(false, booking.getCustomer().isMinimumAgeVerified());
 		Assert.assertEquals(Booking.BookingStatus.CANCELLED, booking.getStatus());
 	}
